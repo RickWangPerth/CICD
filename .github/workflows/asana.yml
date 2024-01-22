@@ -1,0 +1,42 @@
+# This is a workflow to help you link GitHub issues to Asana tasks
+
+name: AsanaTasksLink
+
+# Controls when the workflow will run
+on:
+  issues:
+    types: [opened, edited]
+
+  # Allows you to manually trigger this workflow from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is composed of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job named "build"
+  build:
+    # Specifies the type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+
+    steps:
+        # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install asana
+
+      - name: Create Asana Task
+        env:
+          ASANA_TOKEN: ${{ secrets.ASANA_TOKEN }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_ASSIGNEE: ${{ github.event.issue.assignee.login }}
+        run: python create-asana-task.py
