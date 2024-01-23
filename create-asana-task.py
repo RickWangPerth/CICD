@@ -8,6 +8,7 @@ access_token = os.getenv('ASANA_TOKEN')
 gid = "1200084223367052"
 projects = "1206398263390118"
 issue_assignee = os.getenv('ISSUE_ASSIGNEE') or None
+print(issue_assignee)
 
 # Configure Asana client
 configuration = asana.Configuration()
