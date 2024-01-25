@@ -1,0 +1,15 @@
+blank_issues_enabled: false  # Disables the option for users to create blank issues
+contact_links:
+  - name: Support
+    url: http://example.com/support/
+    about: Please contact our support team for any questions.
+issue_types:
+  - name: Bug Report
+    description: "Report a bug in the software."
+    template: bug_report.yml
+  - name: Feature Request
+    description: "Suggest an idea for this project."
+    template: feature_request.yml
+  - name: Custom Issue
+    description: "For custom issues that don't fit into the above categories."
+    template: custom_issue_template.yml
