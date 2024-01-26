@@ -1,0 +1,36 @@
+name: Documentation Improvement
+description: Use this template to report an issue with the documentation or suggest an improvement.
+title: 'Documentation: [Short Description]'
+
+
+body:
+  - type: markdown
+    attributes:
+      value: "### Documentation Issue or Improvement\nPlease describe the issue with the current documentation or the improvement you are suggesting."
+  - type: input
+    attributes:
+      label: "Detailed Description"
+      description: "Provide a detailed description of the issue or the proposed improvement."
+      placeholder: "E.g., Lack of detail in the API documentation for..."
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: "Impact on Users"
+      description: "Explain how this issue or improvement affects the users or the readability of the documentation."
+      placeholder: "E.g., This section is confusing and could lead to incorrect implementation..."
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: "Suggested Changes"
+      description: "If you have specific suggestions for changes, please list them here."
+      placeholder: "E.g., Add examples, clarify the description of..."
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: "Additional Context"
+      description: "Provide any additional context that could be helpful, such as relevant links or similar documentation sections."
+    validations:
+      required: false
