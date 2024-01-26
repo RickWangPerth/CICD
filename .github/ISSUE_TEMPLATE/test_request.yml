@@ -1,0 +1,31 @@
+name: Test Feature Request
+description: Use this template to request new test features or improvements.
+title: 'Test: [Short Description]'
+labels: ['test']
+
+
+body:
+  - type: markdown
+    attributes:
+      value: "### Test Feature Description\nPlease describe the test feature or improvement you are proposing in detail."
+  - type: input
+    attributes:
+      label: "Detailed Description"
+      description: "Provide a detailed description of the test feature or improvement."
+      placeholder: "E.g., End-to-End User Flow Test..."
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: "Purpose of Test"
+      description: "Explain the purpose and benefits of this test feature or improvement."
+      placeholder: "E.g., Ensures all user flow processes work seamlessly..."
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: "Proposed Methodology"
+      description: "Describe the methodology or approach for implementing this test."
+      placeholder: "E.g., Automated testing using Selenium..."
+    validations:
+      required: true

@@ -1,0 +1,24 @@
+name: Maintenance Task
+description: Use this template to report a maintenance task.
+title: 'Maintenance: [Short Description]'
+labels: ['maintenance']
+
+
+body:
+  - type: markdown
+    attributes:
+      value: "### Maintenance Description\nPlease describe the maintenance task in detail."
+  - type: input
+    attributes:
+      label: "Detailed Description"
+      description: "Provide a detailed description of the maintenance task."
+      placeholder: "E.g., Code Refactoring..."
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: "Impact on Project"
+      description: "Explain how this maintenance will impact the project."
+      placeholder: "E.g., Improves code efficiency..."
+    validations:
+      required: true
