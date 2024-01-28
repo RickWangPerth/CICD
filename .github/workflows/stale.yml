@@ -1,0 +1,15 @@
+name: Stale Issues & PRs
+on:
+    # https://crontab.guru/
+    schedule:
+        - cron: '0 14 * * *' # At 14:00 on Sunday.
+        - cron: '0/5 * * * *' # Every 5 minutes.
+jobs:
+    stale:
+        runs-on: unbuntu-latest
+        steps:
+            - uses: actions/stale@v8
+              with:
+                stale-issue-message: "This is some message."
+                days-before-stale: 1
+                days-before-close: 5
