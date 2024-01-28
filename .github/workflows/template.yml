@@ -35,18 +35,26 @@ on:
             - main
 
     # manual trigger
+    # or trigger by CLI 
+    # gh workflow run template.yml -f name="Github cli" --ref main
+    # https://cli.github.com/manual/gh_workflow_run
+    # or API
+    # https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28#create-a-workflow-dispatch-event
     workflow_dispatch:
         inputs:
             name:
                 description: "Person to greet"
                 type: string # number choice boolean envirnoment
                 required: true
-                default: "Mona the Octocat"
+                default: "Rick"
             time:
                 description: "Time to greet"
                 required: false
                 default: "afternoon"
-        
+    
+    # triggered by external events
+    repository_dispatch:
+        types: [my-event-type, build]
 
 jobs:
     build:
@@ -57,3 +65,4 @@ jobs:
               run: |
                 echo "Hello ${{ github.event.inputs.name }}! 
                 Good ${{ github.event.inputs.time }}."
+
