@@ -1,0 +1,59 @@
+name: CICD template
+on: 
+    push:
+        # filter pattern cheat sheet: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
+
+        branches: # order matters
+            - main
+            - "feature/*" # matches feature/featA feature/featB, does not match feature/featA/fearC
+            - "feature/**" # matches feature/featA feature/featA/featB
+        # branches-ignore: # ignore branches cannot be used with branches at the same time
+        #   - develop
+        tags:
+            - v1.* # matches v1.0 v1.1 v1.2
+            - "!v1.1.1"
+        paths:
+            - "**.js"
+            - "!**.md"
+
+
+    pull_request:
+        types: [opened, synchronize, reopened]
+        branches:
+            - main
+            - "feature/*"
+            - "feature/**"
+        paths:
+            - "**.js"
+            - "!**.md"
+    
+    # triggered by another workflow
+    workflow_run:
+        workflows: ["Previous workflow name"]
+        types: [completed]
+        branches:
+            - main
+
+    # manual trigger
+    workflow_dispatch:
+        inputs:
+            name:
+                description: "Person to greet"
+                type: string # number choice boolean envirnoment
+                required: true
+                default: "Mona the Octocat"
+            time:
+                description: "Time to greet"
+                required: false
+                default: "afternoon"
+        
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Echo input parameters
+              run: |
+                echo "Hello ${{ github.event.inputs.name }}! 
+                Good ${{ github.event.inputs.time }}."
