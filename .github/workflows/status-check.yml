@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
     job-1:
-        runs-on: unbuntu-latest
+        runs-on: ubuntu-latest
         steps:
             - name: step-1
               run: sleep 20
@@ -25,6 +25,6 @@ jobs:
         needs: job-1
         if: failure()
         steps:
-            - run: ehco "Job 2"
+            - run: echo "Job 2"
 
 
