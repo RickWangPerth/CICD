@@ -1,0 +1,30 @@
+name: Status Checj Functions
+on: [push]
+
+jobs:
+    job-1:
+        runs-on: unbuntu-latest
+        steps:
+            - name: step-1
+              run: sleep 20
+            - name: runs on failure
+              if: failure()
+              run: echo "failure"
+            - name: runs on success
+              # this is not needed ( DEFUALT BEHAVIOUR )
+              if: success()
+              run: echo "success"
+            - name: Always runs
+              if: always()
+              run: echo "always"
+            - name: Runs when cancelled
+              if: cancelled()
+              run: echo "cancelled"
+    job-2:
+        runs-on: windows-latest
+        needs: job-1
+        if: failure()
+        steps:
+            - run: ehco "Job 2"
+
+
