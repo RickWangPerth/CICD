@@ -15,8 +15,7 @@ jobs:
             - name: Log CONTEXT
               run: echo ${{ github.ref }}
             - name: Set ENV VAR
-              run: |
-              echo "NEW_ENV_VAR=$(date)" >> $GITHUB_ENV
+              run: echo "NEW_ENV_VAR=$(date)" >> "$GITHUB_ENV"
             - name: Log ENV VAR
               env:
                  STEP_LEVEL_ENV_VAR: "STEP_LEVEL_ENV_VAR"
