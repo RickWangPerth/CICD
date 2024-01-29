@@ -1,4 +1,4 @@
-name: Status Checj Functions
+name: Status Check Functions
 on: [push]
 
 jobs:
