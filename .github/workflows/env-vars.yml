@@ -19,12 +19,10 @@ jobs:
 
             - name: Multiline ENV VAR
               run: |
-                echo "RANDOM_ENV_VAR<<$DELIMITER" >> "$GITHUB_ENV"
+                echo "RANDOM_ENV_VAR<<EOF" >> "$GITHUB_ENV"
                 echo "This is a multi-line: " >> "$GITHUB_ENV"
                 curl -s https://icanhazdadjoke.com/ >> "$GITHUB_ENV"
-                echo "" >> "$GITHUB_ENV"
-                echo "This is a multi-line:" >> "$GITHUB_ENV"
-                echo "DELIMITER" >> "$GITHUB_ENV"
+                echo "EOF" >> "$GITHUB_ENV"
             - name: Log ENV VAR
               env:
                  STEP_LEVEL_ENV_VAR: "STEP_LEVEL_ENV_VAR"
