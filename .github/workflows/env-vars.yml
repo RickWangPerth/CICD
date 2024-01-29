@@ -1,12 +1,27 @@
 name: Environment Variables
 # https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
 on: [push]
-
+env:
+    WF_LEVEL_ENV_VAR: "WF_LEVEL_ENV_VAR"
 jobs:
     env-vars-and-context:
         runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/master'
+        env: 
+            JOB_LEVEL_ENV_VAR: "JOB_LEVEL_ENV_VAR"
         steps:
             - name: Log ENV VAR
               run: echo $GITHUB_REF
             - name: Log CONTEXT
-              run: echo ${{ github.ref  }}
+              run: echo ${{ github.ref }}
+            - name: Set ENV VAR
+              run: |
+              echo "NEW_ENV_VAR=$(date)" >> $GITHUB_ENV
+            - name: Log ENV VAR
+              env:
+                 STEP_LEVEL_ENV_VAR: "STEP_LEVEL_ENV_VAR"
+              run: |
+                echo ${{ env.STEP_LEVEL_ENV_VAR }}
+                echo ${{ env.JOB_LEVEL_ENV_VAR }}
+                echo ${{ env.WF_LEVEL_ENV_VAR }}
+                echo ${{ env.NEW_ENV_VAR }}
