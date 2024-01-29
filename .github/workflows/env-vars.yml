@@ -16,6 +16,15 @@ jobs:
               run: echo ${{ github.ref }}
             - name: Set ENV VAR
               run: echo "NEW_ENV_VAR=$(date)" >> "$GITHUB_ENV"
+
+            - name: Multiline ENV VAR
+              run: |
+                echo "RANDOM_ENV_VAR<<$DELIMITER" >> "$GITHUB_ENV"
+                echo "This is a multi-line: " >> "$GITHUB_ENV"
+                curl -s https://icanhazdadjoke.com/ >> "$GITHUB_ENV"
+                echo "" >> "$GITHUB_ENV"
+                echo "This is a multi-line:" >> "$GITHUB_ENV"
+                echo "DELIMITER" >> "$GITHUB_ENV"
             - name: Log ENV VAR
               env:
                  STEP_LEVEL_ENV_VAR: "STEP_LEVEL_ENV_VAR"
@@ -24,3 +33,4 @@ jobs:
                 echo ${{ env.JOB_LEVEL_ENV_VAR }}
                 echo ${{ env.WF_LEVEL_ENV_VAR }}
                 echo ${{ env.NEW_ENV_VAR }}
+                echo ${{ env.RANDOM_ENV_VAR }}
