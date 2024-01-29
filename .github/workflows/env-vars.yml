@@ -19,9 +19,9 @@ jobs:
 
             - name: Multiline ENV VAR
               run: |
+                DATA=$(curl -s https://icanhazdadjoke.com/)
                 echo "RANDOM_ENV_VAR<<EOF" >> "$GITHUB_ENV"
-                echo "This is a multi-line: " >> "$GITHUB_ENV"
-                curl -s https://icanhazdadjoke.com/ >> "$GITHUB_ENV"
+                echo "This is a multi-line: $DATA" >> "$GITHUB_ENV"
                 echo "EOF" >> "$GITHUB_ENV"
             - name: Log ENV VAR
               env:
