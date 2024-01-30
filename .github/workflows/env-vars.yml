@@ -16,9 +16,10 @@ jobs:
               run: echo ${{ github.ref }}
             - name: Set ENV VAR
               run: echo "NEW_ENV_VAR=$(date)" >> "$GITHUB_ENV"
-
             - name: Multiline ENV VAR
               run: |
+                # cyber secure random string for EOF
+                EOF=$(dd if=/dev/urandom bs=15 count=11 status=none | base64 ) 
                 DATA=$(curl -s https://icanhazdadjoke.com/)
                 echo "RANDOM_ENV_VAR<<EOF" >> "$GITHUB_ENV"
                 echo "This is a multi-line: $DATA" >> "$GITHUB_ENV"
