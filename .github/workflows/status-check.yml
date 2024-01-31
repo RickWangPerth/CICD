@@ -4,10 +4,11 @@ on: [push]
 jobs:
     job-1:
         runs-on: ubuntu-latest
+        timeout-minutes: 1 # cancle the job after 1 minute
         steps:
             - name: step-1
               run: sleep 90
-              timeout-minutes: 1
+              timeout-minutes: 1 # fail the step after 1 minute
             - name: step-2
               id: step-2
               continue-on-error: true
