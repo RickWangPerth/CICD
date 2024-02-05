@@ -1,0 +1,41 @@
+name: Send Spreadsheet Email
+
+on: [push]
+
+jobs:
+  build_and_send_email:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.8'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests beautifulsoup4 pandas pytz
+      
+    - name: Run script and generate spreadsheet
+      id: crawler_script
+      run: python hilux-finder.py
+ 
+      
+    - name: Send email with spreadsheet attachment
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        secure: true
+        username: ${{secrets.MAIL_USERNAME}}
+        password: ${{secrets.MAIL_PASSWORD}}
+        subject: 'Spreadsheet Report'
+        to: 'receiver@example.com'
+        from: 'Your Name <sender@example.com>'
+        attachments: ${{ steps.crawler_script.outputs.excel_path }}
+      env:
+        MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
