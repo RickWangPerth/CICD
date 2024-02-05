@@ -19,7 +19,7 @@ jobs:
         password: ${{secrets.MAIL_PASSWORD}}
         subject: Github Actions job result
         to: xinlalalele@gmail.com
-        from: "Rick Wang <xinlyuwang96@gamil.com>"
+        from: "Rick Wang <xinlyuwang96@gmail.com>"
         body: Hello from actions
         nodemailerlog: true
         nodemailerdebug: true
