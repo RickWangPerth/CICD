@@ -17,4 +17,4 @@ jobs:
         to: xinlalalele@gmail.com
         from: "Rick Wang <xinlyuwang96@gamil.com>" # Specify your name and optional email
         body: Hello from actions
-        server_port: 465
+        nodemailerdebug: true
