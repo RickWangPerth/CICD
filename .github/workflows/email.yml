@@ -12,11 +12,12 @@ jobs:
     - name: Send mail
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: ${{secrets.MAIL_CONNECTION}}
-        server_port: 465
-        secure: true
-        username: ${{secrets.MAIL_USERNAME}}
-        password: ${{secrets.MAIL_PASSWORD}}
+        # server_address: ${{secrets.MAIL_SERVER}}
+        # server_port: 465
+        # secure: true
+        # username: ${{secrets.MAIL_USERNAME}}
+        # password: ${{secrets.MAIL_PASSWORD}}
+        connection_url: ${{secrets.MAIL_CONNECTION}}
         subject: Github Actions job result
         to: xinlalalele@gmail.com
         from: "Rick Wang <xinlyuwang96@gmail.com>"
