@@ -7,15 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Send mail
       uses: dawidd6/action-send-mail@v3
       with:
-        connection_url: ${{secrets.MAIL_CONNECTION}} # This includes all necessary SMTP details
+        server_address: ${{secrets.MAIL_CONNECTION}}
+        server_port: 465
+        secure: true
+        username: ${{secrets.MAIL_USERNAME}}
+        password: ${{secrets.MAIL_PASSWORD}}
         subject: Github Actions job result
         to: xinlalalele@gmail.com
-        from: "Rick Wang <xinlyuwang96@gamil.com>" # Specify your name and optional email
+        from: "Rick Wang <xinlyuwang96@gamil.com>"
         body: Hello from actions
-        server_port: 465
+        nodemailerlog: true
         nodemailerdebug: true
