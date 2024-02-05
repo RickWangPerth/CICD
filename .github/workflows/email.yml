@@ -1,0 +1,19 @@
+name: Send Email Notification
+
+on: [push]
+
+jobs:
+  send-mail:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Send mail
+      uses: dawidd6/action-send-mail@v3
+      with:
+        connection_url: ${{secrets.MAIL_CONNECTION}} # This includes all necessary SMTP details
+        subject: Github Actions job result
+        to: xinlalalele@gmail.com
+        from: "Rick Wang <xinlyuwang96@gamil.com>" # Specify your name and optional email
+        body: Hello from actions
