@@ -28,14 +28,16 @@ jobs:
     - name: Send email with spreadsheet attachment
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: smtp.gmail.com
+        server_address: ${{secrets.MAIL_SERVER}}
         server_port: 465
         secure: true
         username: ${{secrets.MAIL_USERNAME}}
         password: ${{secrets.MAIL_PASSWORD}}
-        subject: 'Spreadsheet Report'
-        to: 'receiver@example.com'
-        from: 'Your Name <sender@example.com>'
+        # connection_url: ${{secrets.MAIL_CONNECTION}}
+        subject: Hilux Finder 
+        to: xinlalalele@gmail.com
+        from: "Rick Wang <xinlyuwang96@gmail.com>"
+        body: Hello from actions
+        nodemailerlog: true
+        nodemailerdebug: true
         attachments: ${{ steps.crawler_script.outputs.excel_path }}
-      env:
-        MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
