@@ -1,34 +1,74 @@
-name: Matrix
+name: Dynamic Matrix
 on:
-    [push]
+    workflow_dispatch:
+        inputs:
+          os:
+            description: 'Operating System'
+            required: true
+            default: 'ubuntu-latest, windows-latest'
+            type: string
+          node-version:
+            description: 'Node Version'
+            required: true
+            default: '10, 12, 14'
+            type: string
 jobs:
+    prepare-matrix:
+        runs-on: ubuntu-latest
+        outputs:
+            matrix: ${{ steps.set-matrix.outputs.matrix }}
+        steps:
+            - id: set-matrix
+              run: |
+                echo ::set-output name=matrix::$(echo ${{ github.event.inputs.os }} | tr ',' '\n' | xargs -I % echo -n "- os: %\n  node-version: ${{ github.event.inputs.node-version }}\n")
     node-matrix:
-        # continue-on-error: true
         strategy:
-            matrix: # run 6 jobs, 2 operating systems and 3 node versions
+            matrix:
                 os: [ubuntu-latest, windows-latest]
                 node-version: [10, 12, 14]
-                include: # merge the matrix with the ralated matrix never override
-                    - os: ubuntu-latest 
-                      is-ubuntu: true
-                    - os: macos-latest
-                      is-macos: true
-                    - expreimental: false # merge to original matrix
-                    - os: ubuntu-latest
-                      node-version: 16
-                      expreimental: true # replace expreimental with true in sepcifc item
-                exclude: # remove the matrix with the ralated item
-                    - os: ubuntu-latest
-                      node-version: 14
-            # fail-fast: false # do not stop the other jobs if one fails
-            # max-parallel: 6   
+                
         runs-on: ${{ matrix.os }}
         steps:
             - run: node -v
-            - run: echo '${{ toJson(matrix) }}'
             - uses: actions/setup-node@v3
               with:
                 node-version: ${{ matrix.node-version }}
             - run: node -v
+
+
+
+
+# name: Matrix
+# on:
+#     [push]
+# jobs:
+#     node-matrix:
+#         # continue-on-error: ${{ matrix.expreimental == true}}
+#         strategy:
+#             matrix: # run 6 jobs, 2 operating systems and 3 node versions
+#                 os: [ubuntu-latest, windows-latest]
+#                 node-version: [10, 12, 14]
+#                 include: # merge the matrix with the ralated matrix never override
+#                     - os: ubuntu-latest 
+#                       is-ubuntu: true
+#                     - os: macos-latest
+#                       is-macos: true
+#                     - expreimental: false # merge to original matrix
+#                     - os: ubuntu-latest
+#                       node-version: 16
+#                       expreimental: true # replace expreimental with true in sepcifc item
+#                 exclude: # remove the matrix with the ralated item
+#                     - os: ubuntu-latest
+#                       node-version: 14
+#             # fail-fast: false # do not stop the other jobs if one fails
+#             # max-parallel: 6   
+#         runs-on: ${{ matrix.os }}
+#         steps:
+#             - run: node -v
+#             - run: echo '${{ toJson(matrix) }}'
+#             - uses: actions/setup-node@v3
+#               with:
+#                 node-version: ${{ matrix.node-version }}
+#             - run: node -v
 
 
