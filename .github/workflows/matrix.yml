@@ -15,8 +15,6 @@ on:
 jobs:
     prepare-matrix:
         runs-on: ubuntu-latest
-        outputs:
-            os: ${{ steps.set-matrix.outputs.os }}
         steps:
             - uses: actions/github-script@v7
               id: matrix-array
