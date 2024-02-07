@@ -32,8 +32,8 @@ jobs:
         needs: prepare-matrix
         strategy:
             matrix:
-                os: ${{ fromJson(needs.prepare-matrix.outputs.input-array.os) }}
-                node-version: ${{ fromJson(needs.prepare-matrix.outputs.input-array.node-version) }}
+                os: ${{ fromJson(needs.prepare-matrix.outputs.input-array).os }}
+                node-version: ${{ fromJson(needs.prepare-matrix.outputs.input-array).node-version }}
                 
         runs-on: ${{ matrix.os }}
         steps:
