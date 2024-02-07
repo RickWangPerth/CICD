@@ -27,7 +27,7 @@ jobs:
                         'node-version': context.payload.inputs['node-version'].split(',')
                     })
                 result-encoding: string
-
+            - run: echo ${{ steps.matrix-array.outputs.result }}
     node-matrix:
         needs: prepare-matrix
         strategy:
