@@ -10,13 +10,13 @@ on:
           node-version:
             description: 'Node Version'
             required: true
-            default: '10, 12, 14'
+            default: '10, 12'
             type: string
 jobs:
     prepare-matrix:
         runs-on: ubuntu-latest
         outputs:
-            os: ${{ steps.set-matrix.outputs }}
+            os: ${{ steps.set-matrix.outputs.os }}
         steps:
             - id: set-matrix
               run: echo ${{ github.event.inputs.os }}
