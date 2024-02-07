@@ -5,7 +5,7 @@ on:
           os:
             description: 'Operating System'
             required: true
-            default: 'ubuntu-latest, windows-latest'
+            default: 'ubuntu-latest, mac-latest'
             type: string
           node-version:
             description: 'Node Version'
@@ -15,6 +15,8 @@ on:
 jobs:
     prepare-matrix:
         runs-on: ubuntu-latest
+        outputs:
+            input-array: ${{ steps.matrix-array.outputs.result }}
         steps:
             - uses: actions/github-script@v7
               id: matrix-array
@@ -26,13 +28,12 @@ jobs:
                     }
                 result-encoding: json
             - run: echo "${{ steps.matrix-array.outputs.result }}"
-               
-
     node-matrix:
+        needs: prepare-matrix
         strategy:
             matrix:
-                os: [ubuntu-latest, windows-latest]
-                node-version: [10, 12]
+                os: ${{ needs.prepare-matrix.outputs.input-array.os }}
+                node-version: ${{ needs.prepare-matrix.outputs.input-array.node-version }}
                 
         runs-on: ${{ matrix.os }}
         steps:
