@@ -19,8 +19,9 @@ jobs:
             matrix: ${{ steps.set-matrix.outputs.matrix }}
         steps:
             - id: set-matrix
-              run: |
-                echo ::set-output name=matrix::$(echo ${{ github.event.inputs.os }} | tr ',' '\n' | xargs -I % echo -n "- os: %\n  node-version: ${{ github.event.inputs.node-version }}\n")
+              run: echo ${{ github.event.inputs.os }}
+               
+
     node-matrix:
         strategy:
             matrix:
