@@ -5,7 +5,7 @@ on:
           os:
             description: 'Operating System'
             required: true
-            default: 'ubuntu-latest, mac-latest'
+            default: 'ubuntu-latest, macos-latest'
             type: string
           node-version:
             description: 'Node Version'
@@ -22,12 +22,12 @@ jobs:
               id: matrix-array
               with:
                 script: |
-                    return {
+                    return JSON.stringify({
                         os: context.payload.inputs['os'].split(','),
                         'node-version': context.payload.inputs['node-version'].split(',')
-                    }
-                result-encoding: json
-            - run: echo "${{ steps.matrix-array.outputs.result }}"
+                    })
+                result-encoding: string
+
     node-matrix:
         needs: prepare-matrix
         strategy:
