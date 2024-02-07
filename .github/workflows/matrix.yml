@@ -3,7 +3,7 @@ on:
     [push]
 jobs:
     node-matrix:
-        continue-on-error: true
+        # continue-on-error: true
         strategy:
             matrix: # run 6 jobs, 2 operating systems and 3 node versions
                 os: [ubuntu-latest, windows-latest]
