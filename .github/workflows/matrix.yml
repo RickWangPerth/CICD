@@ -27,7 +27,7 @@ jobs:
                         node-version: context.payload.inputs['node-version'].split(',')
                     }
                 result-encoding: json
-            - run: echo '${{ steps.matrix-array.outputs.result }}'
+            - run: echo "${{ steps.matrix-array.outputs.result }}""
                
 
     node-matrix:
