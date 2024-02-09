@@ -1,4 +1,5 @@
-name: concurrenty 1
+name: concurrenty 2
+run-name: concurrenty 2 (${{github.event.inputs.environment}})
 on: 
     workflow_dispatch:
         inputs:
@@ -7,6 +8,10 @@ on:
                 required: true
                 default: 'dev'
                 type: environment
+concurrency:  # runs only one job with same input at a time
+    group: ${{ github.event.inputs.environment }}
+    cancel-in-progress: true # cancel any in-progress runs
+
 jobs:
     sleep:
         runs-on: ubuntu-latest
