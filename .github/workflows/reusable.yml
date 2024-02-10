@@ -1,0 +1,35 @@
+name: Resuable workflows
+on:
+    workflow_call:
+        inputs:
+            workflow_id:
+                description: 'The ID of the workflow to run'
+                required: true
+                default: 'my-workflow'
+                type: string
+            workflow_input:
+                description: 'The input to pass to the workflow'
+                required: false
+                type: string
+        secrets:
+            ACCESS_TOKEN:
+                description: 'Secret token to access the repository'
+                required: true
+jobs:
+    checkout:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - run: ls -a
+    log-context-and-inputs:
+        runs-on: ubuntu-latest
+        needs: checkout
+        steps:
+            - name: Log context and inputs
+              run: echo "${{ toJson(github) }}"
+            - name: Log inputs
+              run: echo "${{ toJson(inputs) }}"
+            - name: Log secrets
+              run: echo "${{ toJson(secrets) }}"
+           
+
