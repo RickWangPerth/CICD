@@ -14,6 +14,13 @@ jobs:
             restore-keys: |
               ${{ runner.os }}-npm-cache-
               ${{ runner.os }}-
+
+        # - uses:actions/checkout@v4
+        # - uses: actions/stepup-node@v2
+        #   with:
+        #     node-version: 16
+        #     cache: 'npm'
+        
         - name: Display cache output
           run: echo "${{ toJson(steps.cache-dependencies.outputs) }}"
               
