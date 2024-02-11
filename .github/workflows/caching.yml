@@ -4,11 +4,20 @@ jobs:
   use-axois:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v3
+        - uses: actions/checkout@v4
+        - name: Cache node modules
+          id: cache-dependencies
+          uses: actions/cache@v3
+          with:
+            path: ~/.npm
+            key: "npm-cache"
+        - name: Display cache output
+          run: echo "${{ toJson(steps.cache-dependencies.outputs) }}"
+              
         - name: Install dependencies
           run: npm install
         - name: Use Axios
-          uses: actions/github-script@v6
+          uses: actions/github-script@v7
           with:
             script: |
                 const axios = require('axios');
