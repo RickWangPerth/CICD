@@ -1,4 +1,4 @@
-name: Dacoker
+name: Docker
 on: [workflow_dispatch]
 
 jobs:
