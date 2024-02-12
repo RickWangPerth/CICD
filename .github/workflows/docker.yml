@@ -5,7 +5,7 @@ jobs:
     docker-job:
         runs-on: ubuntu-latest
         container: 
-            image: node:20.3 aplpine
+            image: node:21-alpine3.18
             # credentials:
             #     username: ${{ secrets.DOCKER_USERNAME }}
             #     password: ${{ secrets.DOCKER_PASSWORD }}
