@@ -37,4 +37,11 @@ jobs:
               with:
                 entrypoint: cat
                 args: text.txt
+            - uses: actions/checkout@v3
+            - name: Run a bash Script
+              uses: docker://node:21-alpine3.18
+              with:
+                entrypoint: ./script.sh
+                args: "Some args"
+
                   
