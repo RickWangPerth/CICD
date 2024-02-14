@@ -1,0 +1,19 @@
+name: Hello World
+author: Rick Wang
+description: Greet someon and record the time
+inputs:
+    who_to_greet:
+        description: The name of the person to greet
+        type: string
+        required: true
+        default: "World"
+outputs:
+    time:
+        description: The time the action was executed
+runs:
+    using: "node16"
+    main: "index.js"
+    pre: "setup.js"
+    pre-if: runner.os == 'Linux'
+    post: "cleanup.js"
+    post-if: runner.os == 'Linux'
