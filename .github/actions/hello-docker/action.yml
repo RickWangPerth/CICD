@@ -4,15 +4,20 @@ description: Greet someon and record the time
 inputs:
     who_to_greet:
         description: The name of the person to greet
-        required: true
+        # required: true
         default: "World"
 outputs:
     time:
         description: The time the action was executed
 runs:
-    using: "node16"
-    main: "dist/index.js"
-    pre: "setup.js"
-    pre-if: runner.os == 'Linux'
-    post: "cleanup.js"
+    using: "docker"
+    # image: 'docker://node:18.16-alpine3.17'
+    image: 'Dockerfile'
+    # entrypoint:
+    args:
+        - ${{ inputs.who_to_greet }}
+    env:
+        HELLO: WORLD
+    post-entrypoint: "/cleanup.sh"
     post-if: runner.os == 'Linux'
+        
