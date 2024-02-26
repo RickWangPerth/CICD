@@ -6,4 +6,4 @@ echo "HELLO: $HELLO"
 time=$(date)
 
 echo "time=$time" >> $GITHUB_OUTPUT
-echo "HELLO_TIME=$time" >> $GITHUB_ENV"
+echo "HELLO_TIME=$time" >> $GITHUB_ENV
